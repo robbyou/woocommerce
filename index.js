@@ -19,11 +19,29 @@ jQuery(document).ready(function( $ ){
         durabilityDescription.prev().toggle();
     });
     // woocommerce single product gallery nav handle
-//     $('.gallery-dot').click(function() {
-//         var index = $(this).data('index');
-//         $('.gallery-image').hide().eq(index).fadeIn();
-//         $('.gallery-dot').removeClass('active').eq(index).addClass('active');
-//     });
+    var slider = $('.product-image-slider');
+    var slides = slider.find('.slide');
+    var navItems = slider.find('.nav-item');
+
+    var currentIndex = 0;
+
+    function showSlide(index) {
+        slides.removeClass('active');
+        navItems.removeClass('active');
+
+        slides.eq(index).addClass('active');
+        navItems.eq(index).addClass('active');
+    }
+
+    navItems.on('click', function() {
+        var clickedIndex = $(this).data('index');
+        if (clickedIndex !== currentIndex) {
+            currentIndex = clickedIndex;
+            showSlide(currentIndex);
+        }
+    });
+    // Afficher la première image du slider
+    showSlide(currentIndex);
     //product page
     //verification des stocks des variation et application du style
     function setVariationsStock(variations){
